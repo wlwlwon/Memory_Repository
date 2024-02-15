@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.ktds.reforce.board.dto.BoardDTO" alias="board"></typeAlias>
+        <typeAlias type="com.ktds.reforce.image.dto.ImageDTO" alias="image"></typeAlias>
+        <typeAlias type="com.ktds.reforce.image.dto.LikeDTO" alias="likedto"></typeAlias>
+        <typeAlias type="com.ktds.reforce.image.dto.CommentDTO" alias="comment"></typeAlias>
+        <typeAlias type="com.ktds.reforce.user.dto.UserDTO" alias="user"></typeAlias>
+
+    </typeAliases>
+</configuration>

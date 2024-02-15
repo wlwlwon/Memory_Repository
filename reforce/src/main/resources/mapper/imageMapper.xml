@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Image">
+    <select id="findAll" resultType="image">
+        select *
+        from image as I
+        join user as U on I.userId = U.userId
+    </select>
+    <select id="commentList" resultType="comment" parameterType="Long">
+        select *
+        from comment as C
+        join user as U on C.userId = U.userId
+        where imageId = #{imageId}
+        order by commentCreatedTime;
+    </select>
+    <select id="isLike" parameterType="likedto" resultType="likedto">
+        select userId, imageId
+        from like_rate
+        where userId = #{userId}
+          and ImageId = #{imageId}
+    </select>
+    <select id="countLike" parameterType="Long" resultType="int">
+        select count(distinct userId)
+        from like_rate
+        where imageId = #{imageId};
+    </select>
+    <select id="findById" parameterType="Long" resultType="image">
+        select *
+        from image as I
+        join user as U on I.userId = U.userId
+        where imageId = #{imageId};
+    </select>
+
+    <insert id="save" parameterType="image">
+        insert into image(imageName, path, content, userId, imageCreatedTime)
+        values (#{imageName}, #{path}, #{content}, #{userId},#{imageCreatedTime})
+    </insert>
+
+    <insert id="addComment" parameterType="comment">
+        insert into comment(commentContent, userId, imageId, commentCreatedTime)
+        values (#{commentContent}, #{userId}, #{imageId}, #{commentCreatedTime})
+    </insert>
+
+    <select id="checkLike" parameterType="likedto" resultType="likedto">
+        select *
+        from like_rate
+        where userId = #{userId} and imageId = #{imageId}
+    </select>
+    <insert id="updateLike" parameterType="likedto">
+        insert into like_rate(imageId, userId)
+        values (#{imageId}, #{userId})
+    </insert>
+    <delete id="disLike" parameterType="likedto">
+        delete
+        from like_rate
+        where userId = #{userId} and imageId = #{imageId}
+    </delete>
+</mapper>
